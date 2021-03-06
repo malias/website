@@ -2,6 +2,11 @@
 
 use Illuminate\Support\Facades\Route;
 
+use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\IndexController;
+use App\Http\Controllers\PostController;
+use App\Http\Controllers\TagController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -13,9 +18,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', IndexController::class);
+Route::get('/category/{slug}', CategoryController::class);
+Route::get('/tag/{slug}', TagController::class);
+Route::get('/post/{slug}', [PostController::class, 'show']);
 
 
 Route::group(['prefix' => 'admin'], function () {
