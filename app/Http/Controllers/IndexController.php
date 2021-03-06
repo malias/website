@@ -16,6 +16,8 @@ class IndexController extends Controller
             ->where('is_published',true)
             ->orderBy('id','desc')
             ->get();
+        
+        $posts = Post::where('is_published',true)->orderBy('id','desc')->paginate(5);
 
         //get the featured posts
         $featured_posts = Post::query()

@@ -13,3 +13,5 @@
         </div>
     </div>
 @endforeach
+
+@include('widgets.blog-masonry')
