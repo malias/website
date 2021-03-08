@@ -2,17 +2,17 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Post;
+use App\Models\Blog;
 use App\Models\Tag;
 use App\Models\Category;
 use Illuminate\Http\Request;
 
-class PostController extends Controller
+class BlogController extends Controller
 {
     public function show($slug)
     {
         //get the requested post, if it is published
-        $post = Post::query()
+        $blog = Blog::query()
             ->where('is_published', true)
             ->where('slug', $slug)
             ->firstOrFail();
@@ -24,19 +24,19 @@ class PostController extends Controller
         $tags = Tag::all();
 
         //get the recent 5 posts
-        $recent_posts = Post::query()
+        $recent_blogs = Blog::query()
             ->where('is_published', true)
             ->orderBy('created_at', 'desc')
             ->take(5)
             ->get();
 
         //return the data to the corresponding view
-        return view('post', [
+        return view('blog', [
            // 'website' => $website,
-            'post' => $post,
+            'blog' => $blog,
             'categories' => $categories,
             'tags' => $tags,
-            'recent_posts' => $recent_posts,
+            'recent_blogs' => $recent_blogs,
         ]);
     }
 
@@ -44,7 +44,7 @@ class PostController extends Controller
     {
         $key = trim($request->get('q'));
 
-        $posts = Post::query()
+        $blogs = Blog::query()
             ->where('title', 'like', "%{$key}%")
             ->orWhere('content', 'like', "%{$key}%")
             ->orderBy('created_at', 'desc')
@@ -57,7 +57,7 @@ class PostController extends Controller
         $tags = Tag::all();
 
         //get the recent 5 posts
-        $recent_posts = Post::query()
+        $recent_blogs = Blog::query()
             ->where('is_published', true)
             ->orderBy('created_at', 'desc')
             ->take(5)
@@ -65,10 +65,10 @@ class PostController extends Controller
 
         return view('search', [
             'key' => $key,
-            'posts' => $posts,
+            'blogs' => $blogs,
             'categories' => $categories,
             'tags' => $tags,
-            'recent_posts' => $recent_posts
+            'recent_blogs' => $recent_blogs
         ]);
     }
     

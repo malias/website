@@ -20,8 +20,8 @@ class Category extends Model
     /**
      * Get the posts for the user.
      */
-    public function posts()
+    public function blogs()
     {
-        return $this->hasMany('App\Models\Post');
+        return $this->hasMany('App\Models\Blog');
     }
 }

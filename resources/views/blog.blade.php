@@ -8,7 +8,7 @@
 @endsection
 
 @section('title')
-    <title>{{$post['title']}}{{ setting('site.title') }}</title>
+    <title>{{$blog['title']}}{{ setting('site.title') }}</title>
 @endsection
 
 @section('content')
@@ -18,25 +18,25 @@
         <div class="col-lg-8">
 
             <!-- Title -->
-            <h1 class="mt-4">{{$post['title']}}</h1>
+            <h1 class="mt-4">{{$blog['title']}}</h1>
 
             <!-- Author -->
             <p class="lead">
                 by
-                <a href="#">{{$post->user['name']}}</a>
+                <a href="#">{{$blog->user['name']}}</a>
             </p>
             <hr>
 
             <!-- Date/Time -->
-            <p>Posted on {{$post->created_at->format('M d, Y')}}</p>
+            <p>Posted on {{$blog->created_at->format('M d, Y')}}</p>
             <hr>
 
             <!-- Preview Image -->
-            <img class="img-fluid rounded" src="{{\Illuminate\Support\Facades\Storage::url($post->featured_image)}}" alt="">
+            <img class="img-fluid rounded" src="{{\Illuminate\Support\Facades\Storage::url($blog->featured_image)}}" alt="">
             <hr>
 
             <!-- Post Content -->
-            {!! $post->content !!}
+            {!! $blog->content !!}
             <hr>
 
         </div>

@@ -17,9 +17,11 @@ class Tag extends Model
         'description',
         'slug',
     ];
-
-    public function posts()
+    /**
+     * Get the posts for the user.
+     */
+    public function blogs()
     {
-        return $this->belongsToMany('App\Models\Post');
+        return $this->belongsToMany('App\Models\Blog');
     }
 }

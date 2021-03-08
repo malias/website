@@ -59,9 +59,9 @@
             <div class="row">
                 <div class="col-lg-12">
                     <ul class="list-unstyled mb-0">
-                        @foreach($recent_posts as $post)
+                        @foreach($recent_blogs as $blog)
                             <li>
-                                <a href="/post/{{$post['slug']}}">{{$post['title']}}</a>
+                                <a href="/blog/{{$blog['slug']}}">{{$blog['title']}}</a>
                             </li>
                             <hr>
                         @endforeach

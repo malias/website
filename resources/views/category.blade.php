@@ -8,7 +8,7 @@
 @endsection
 
 @section('title')
-    <title>{{$website['website_title']}} - Category:{{$category['name']}}</title>
+    <title>{{ setting('site.title') }} - Category:{{$category['name']}}</title>
 @endsection
 
 @section('content')
@@ -21,6 +21,7 @@
             </h1>
 
             @include('vendor.posts-list')
+            @include('widgets.blog-masonry')       
 
         </div>
         @include('vendor.sidebar')

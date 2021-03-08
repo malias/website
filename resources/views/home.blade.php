@@ -21,6 +21,7 @@
             </h1>
 
             @include('vendor.posts-list')
+            @include('widgets.blog-masonry')       
 
         </div>
         @include('vendor.sidebar')

@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Post;
+use App\Models\Blog;
 use App\Models\Tag;
 use App\Models\Category;
 use Illuminate\Http\Request;
@@ -17,10 +17,11 @@ class TagController extends Controller
             ->firstOrFail();
 
         //get the posts with that tag
-        $posts = $tag->posts()
+        $blogs = $tag->blogs()
             ->where('is_published',true)
             ->orderBy('id','desc')
             ->get();
+            $blogs = Blog::where('is_published',true)->orderBy('id','desc')->paginate(5);
 
         //get all the categories
         $categories = Category::all();
@@ -29,7 +30,7 @@ class TagController extends Controller
         $tags = Tag::all();
 
         //get the recent 5 posts
-        $recent_posts = Post::query()
+        $recent_blogs = Blog::query()
             ->where('is_published',true)
             ->orderBy('created_at','desc')
             ->take(5)
@@ -39,10 +40,10 @@ class TagController extends Controller
         return view('tag', [
             //'website' => $website,
             'tag' => $tag,
-            'posts' => $posts,
+            'blogs' => $blogs,
             'categories' => $categories,
             'tags' => $tags,
-            'recent_posts' => $recent_posts
+            'recent_blogs' => $recent_blogs
         ]);
     }
 }
