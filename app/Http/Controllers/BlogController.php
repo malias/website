@@ -29,6 +29,14 @@ class BlogController extends Controller
             ->orderBy('created_at', 'desc')
             ->take(5)
             ->get();
+        //related posts
+        $related_blogs = Blog::query()
+        ->where('is_published',true)
+        ->whereHas('tags', function ($q) use ($blog) {
+            
+        return $q->whereIn('name', $blog->tags->pluck('name'));
+        })
+            ->where('id', '!=', $blog->id)->take(3)->get();                    
 
         //return the data to the corresponding view
         return view('blog', [
@@ -37,6 +45,7 @@ class BlogController extends Controller
             'categories' => $categories,
             'tags' => $tags,
             'recent_blogs' => $recent_blogs,
+            'related_blogs' => $related_blogs,
         ]);
     }
 
@@ -63,12 +72,15 @@ class BlogController extends Controller
             ->take(5)
             ->get();
 
+        
+
         return view('search', [
             'key' => $key,
             'blogs' => $blogs,
             'categories' => $categories,
             'tags' => $tags,
-            'recent_blogs' => $recent_blogs
+            'recent_blogs' => $recent_blogs,
+            
         ]);
     }
     
