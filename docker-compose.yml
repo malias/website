@@ -37,6 +37,18 @@ services:
             - sail
         healthcheck:
           test: ["CMD", "mysqladmin", "ping"]
+    myadmin:
+        image: 'phpmyadmin:latest'
+        ports:
+          - 8080:80
+        environment:
+          MYSQL_ROOT_PASSWORD: '${DB_PASSWORD}'
+        links:
+          - "mysql:db"
+        depends_on:
+          - mysql
+        networks:
+          - sail
     redis:
         image: 'redis:alpine'
         ports:
